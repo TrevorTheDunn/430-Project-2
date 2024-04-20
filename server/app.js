@@ -52,6 +52,7 @@ redisClient.connect().then(() => {
   app.engine('handlebars', expressHandlebars.engine({ defaultLayout: '' }));
   app.set('view engine', 'handlebars');
   app.set('views', `${__dirname}/../views`);
+  app.disable('x-powered-by');
 
   router(app);
 
