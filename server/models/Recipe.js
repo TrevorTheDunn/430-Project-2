@@ -3,26 +3,6 @@ const _ = require('underscore');
 
 const setTitle = (title) => _.escape(title).trim();
 const setAuthor = (author) => _.escape(author).trim();
-const setTags = (tags) => {
-    for(let i = 0; i < tags.length; i++) {
-        _.escape(tags[i]).trim();
-    }
-};
-const setIngredients = (ingredients) => {
-    for(let i = 0; i < ingredients.length; i++) {
-        _.escape(ingredients[i]).trim();
-    }
-};
-const setEquipment = (equipment) => {
-    for(let i = 0; i < equipment.length; i++) {
-        _.escape(equipment[i]).trim();
-    }
-};
-const setInstructions = (instructions) => {
-    for(let i = 0; i < instructions.length; i++) {
-        _.escape(instructions[i]).trim();
-    }
-};
 
 const RecipeSchema = new mongoose.Schema({
     title: {
@@ -38,10 +18,9 @@ const RecipeSchema = new mongoose.Schema({
         set: setAuthor,
     },
     tags: {
-        type: [String],
+        type: Array,
         required: false,
         trim: true,
-        set: setTags,
     },
     prepTime: {
         type: Number,
@@ -54,22 +33,22 @@ const RecipeSchema = new mongoose.Schema({
         required: true,
     },
     ingredients: {
-        type: [String],
+        type: Array,
         required: true,
+        default: undefined,
         trim: true,
-        set: setIngredients,
     },
     equipment: {
-        type: [String],
+        type: Array,
         required: true,
+        default: undefined,
         trim: true,
-        set: setEquipment,
     },
     instructions: {
-        type: [String],
+        type: Array,
         required: true,
+        default: undefined,
         trim: true,
-        set: setInstructions,
     },
     owner: {
         type: mongoose.Schema.ObjectId,

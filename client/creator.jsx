@@ -3,21 +3,45 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+// Handles when the RecipeForm is submitted by collecting data
+// And calling sendPost from the helper.js file
 const handleRecipe = (e, onRecipeAdded) => {
     e.preventDefault();
     helper.hideError();
 
     const title = e.target.querySelector('#recipeTitle').value;
-    const author = e.target.querySelector('#username').value;
-    const tags = e.target.querySelectorAll('li.tag').value;
+    //const author = e.target.querySelector('#username').value;
+    const author = e.target.querySelector('#recipeAuthor').value;
+    //const tags = e.target.querySelectorAll('li.tag').value;
     const prepTime = e.target.querySelector('#recipePrepTime').value;
     const cookTime = e.target.querySelector('#recipeCookTime').value;
-    const ingredients = e.target.querySelectorAll('li.ingredient').value;
-    const equipment = e.target.querySelectorAll('li.equipment').value;
-    const instructions = e.target.querySelectorAll('li.instruction').value;
 
+    // Retrieves nodeList of all ingredients, equipment, and instructions
+    const ingredientsList = e.target.querySelectorAll('#ingredient');
+    const equipmentList = e.target.querySelectorAll('#equipment');
+    const instructionsList = e.target.querySelectorAll('#instruction');
+
+    // Creates new arrays for ingredients, equipment, and instructions
+    // And loops through each and adds the text to the array
+    let ingredients = [];
+    let equipment = [];
+    let instructions = [];
+    for(let i = 0; i < ingredientsList.length; i++) {
+        ingredients[i] = ingredientsList.item(i).innerText;
+    }
+    for(let i = 0; i < equipmentList.length; i++) {
+        equipment[i] = equipmentList.item(i).innerText;
+    }
+    for(let i = 0; i < instructionsList.length; i++) {
+        instructions[i] = instructionsList.item(i).innerText;
+    }
+
+    // Checks if any required field is missing
     if(!title) {
         helper.handleError('Title is required!');
+        return false;
+    } else if (!author) {
+        helper.handleError('Author is required!');
         return false;
     } else if(!prepTime) {
         helper.handleError('Prep Time is required!');
@@ -25,16 +49,18 @@ const handleRecipe = (e, onRecipeAdded) => {
     } else if(!cookTime) {
         helper.handleError('Cook Time is required!');
         return false;
-    } else if(!ingredients) {
+    } else if(!ingredientsList) {
         helper.handleError('Ingredients are required!');
         return false;
-    } else if(!equipment) {
+    } else if(!equipmentList) {
         helper.handleError('Equipment is required!');
         return false;
-    } else if(!instructions) {
+    } else if(!instructionsList) {
         helper.handleError('Instructions are required!');
         return false;
     }
+
+    let tags = "";
 
     helper.sendPost(e.target.action, 
         {title, author, tags, prepTime, cookTime, ingredients, equipment, instructions},
@@ -42,6 +68,8 @@ const handleRecipe = (e, onRecipeAdded) => {
     return false;
 };
 
+// Adds a new list item to the list passed in
+// With a passed in id and innerText value
 const addListItem = (list, id, item) => {
     let li = document.createElement('li');
     li.className = 'listItem';
@@ -51,6 +79,8 @@ const addListItem = (list, id, item) => {
     return false;
 };
 
+// Determines which list the button that was triggered belongs to
+// And calls addListItem while passing in the correct values and elements
 const determineList = (e) => {
     if(e.target.id === 'ingredientsButton') {
         const ingredientList = document.getElementById('ingredientList');
@@ -72,6 +102,7 @@ const determineList = (e) => {
     return false;
 };
 
+// Handles creation of the recipe form
 const RecipeForm = (props) => {
     return (
         <form id="recipeForm"
@@ -82,6 +113,7 @@ const RecipeForm = (props) => {
               className="recipeForm"
         >
             <input id="recipeTitle" type="text" name="title" placeholder="Recipe Title" />
+            <input id="recipeAuthor" type="text" name="author" placeholder="Author" />
             <label htmlFor="prepTime">Prep Time: </label>
             <input id="recipePrepTime" type="number" min="0" name="prepTime" />
             <label htmlFor="cookTime">Cook Time: </label>
@@ -106,6 +138,7 @@ const RecipeForm = (props) => {
     );
 };
 
+// Init renders the RecipeForm to the content div
 const init = () => {
     const root = createRoot(document.getElementById('content'));
     root.render( <RecipeForm /> );

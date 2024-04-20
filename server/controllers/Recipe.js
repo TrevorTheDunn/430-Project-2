@@ -14,17 +14,23 @@ const createRecipe = async (req, res) => {
         });
     }
 
+    console.log("Ingredients: " + req.body.ingredients);
+    console.log("Equipment: " + req.body.equipment);
+    console.log("Instructions: " + req.body.instructions);
+
     const recipeData = {
         title: req.body.title,
-        author: req.body.author,
+        author: req.session.account.username,
         tags: req.body.tags,
         prepTime: req.body.prepTime,
         cookTime: req.body.cookTime,
         ingredients: req.body.ingredients,
         equipment: req.body.equipment,
         instructions: req.body.instructions,
-        owner: req.session.accout._id,
+        owner: req.session.account._id,
     };
+
+    console.log("Recipe Data: " + recipeData);
 
     try {
         const newRecipe = new Recipe(recipeData);
@@ -37,7 +43,7 @@ const createRecipe = async (req, res) => {
             cookTime: newRecipe.cookTime,
             ingredients: newRecipe.ingredients,
             equipment: newRecipe.ingredients,
-            instructions: newRecipe.instructions
+            instructions: newRecipe.instructions,
         });
     } catch (err) {
         console.log(err);
