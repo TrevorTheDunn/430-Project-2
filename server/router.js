@@ -23,7 +23,7 @@ const router = (app) => {
 
   app.get('/viewer', controllers.Recipe.viewerPage);
 
-  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/', controllers.Recipe.homePage);
 };
 
 module.exports = router;
