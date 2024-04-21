@@ -4,7 +4,7 @@ const mid = require('./middleware');
 const router = (app) => {
   //app.get('/getDomos', mid.requiresLogin, controllers.Domo.getDomos);
 
-  //app.get('/getRecipes', controllers.Recipe.getRecipes);
+  app.get('/getRecipes', controllers.Recipe.getRecipes);
 
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
@@ -20,6 +20,8 @@ const router = (app) => {
   app.post('/creator', mid.requiresLogin, controllers.Recipe.createRecipe);
 
   app.get('/home', controllers.Recipe.homePage);
+
+  app.get('/viewer', controllers.Recipe.viewerPage);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
