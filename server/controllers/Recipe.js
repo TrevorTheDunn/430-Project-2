@@ -2,9 +2,11 @@ const models = require('../models');
 
 const { Recipe } = models;
 
+//Renders the creator or home pages if called
 const creatorPage = async (req, res) => res.render('creator');
 const homePage = async (req, res) => res.render('home');
 
+//Retrieves recipes from the database and returns them
 const getRecipes = async (req, res) => {
     try {
         const query = {};
@@ -19,6 +21,7 @@ const getRecipes = async (req, res) => {
     }
 };
 
+//Creates a Recipe and sends it to the database
 const createRecipe = async (req, res) => {
     if (!req.body.title || !req.body.prepTime || 
         !req.body.cookTime || !req.body.ingredients || 
@@ -27,10 +30,6 @@ const createRecipe = async (req, res) => {
             error: 'Title, Prep Time, Cook Time, Ingredients, Equipment, and Instructions are Required!'
         });
     }
-
-    console.log("Ingredients: " + req.body.ingredients);
-    console.log("Equipment: " + req.body.equipment);
-    console.log("Instructions: " + req.body.instructions);
 
     const recipeData = {
         title: req.body.title,
@@ -43,8 +42,6 @@ const createRecipe = async (req, res) => {
         instructions: req.body.instructions,
         owner: req.session.account._id,
     };
-
-    console.log("Recipe Data: " + recipeData);
 
     try {
         const newRecipe = new Recipe(recipeData);
@@ -68,6 +65,7 @@ const createRecipe = async (req, res) => {
     }
 };
 
+//exports functions
 module.exports = {
     creatorPage,
     createRecipe,

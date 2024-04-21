@@ -6,8 +6,6 @@ const router = (app) => {
 
   app.get('/getRecipes', controllers.Recipe.getRecipes);
 
-  //app.get('/getRecipeById', controllers.Recipe.getRecipeById);
-
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
 
