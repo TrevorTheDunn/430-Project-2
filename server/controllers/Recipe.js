@@ -4,47 +4,18 @@ const { Recipe } = models;
 
 const creatorPage = async (req, res) => res.render('creator');
 const homePage = async (req, res) => res.render('home');
-const viewerPage = async (req, res) => res.render('viewer');
 
 const getRecipes = async (req, res) => {
     try {
         const query = {};
         const docs = await Recipe.find(query)
-            .select('title author prepTime cookTime ingredients equipment instructions createdDate')
+            .select('title author prepTime cookTime ingredients equipment instructions createdDate _id')
             .lean().exec();
 
         return res.json({ recipes: docs });
     } catch (err) {
         console.log(err);
         return res.status(500).json({ error: 'Error retriving recipes!' });
-    }
-};
-
-const getRecipeById = async (req, res) => {
-    try {
-        const query = { id: req.id };
-        const docs = await Recipe.find(query)
-            .select('title author prepTime cookTime ingredients equipment instructions')
-            .lean().exec();
-        
-        return res.json({ recipe: docs });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({ error: 'Error retrieving recipe!' });
-    }
-};
-
-const getRecipeByAuthor = async (req, res) => {
-    try {
-        const query = { author: req.author };
-        const docs = await Recipe.find(query)
-            .select('title author prepTime cookTime ingredients equipment instructions')
-            .lean().exec();
-
-        return res.json({ recipes: docs });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({ error: 'Error retrieving recipes!' });
     }
 };
 
@@ -101,8 +72,5 @@ module.exports = {
     creatorPage,
     createRecipe,
     homePage,
-    viewerPage,
     getRecipes,
-    getRecipeById,
-    getRecipeByAuthor,
 };
