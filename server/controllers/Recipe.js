@@ -47,14 +47,7 @@ const createRecipe = async (req, res) => {
         const newRecipe = new Recipe(recipeData);
         await newRecipe.save();
         return res.status(201).json({
-            title: newRecipe.title,
-            author: newRecipe.author,
-            tags: newRecipe.tags,
-            prepTime: newRecipe.prepTime,
-            cookTime: newRecipe.cookTime,
-            ingredients: newRecipe.ingredients,
-            equipment: newRecipe.ingredients,
-            instructions: newRecipe.instructions,
+            redirect: '/home'
         });
     } catch (err) {
         console.log(err);
