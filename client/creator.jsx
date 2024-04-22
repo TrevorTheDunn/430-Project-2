@@ -10,8 +10,6 @@ const handleRecipe = (e, onRecipeAdded) => {
     helper.hideError();
 
     const title = e.target.querySelector('#recipeTitle').value;
-    //const author = e.target.querySelector('#username').value;
-    const author = e.target.querySelector('#recipeAuthor').value;
     //const tags = e.target.querySelectorAll('li.tag').value;
     const prepTime = e.target.querySelector('#recipePrepTime').value;
     const cookTime = e.target.querySelector('#recipeCookTime').value;
@@ -40,9 +38,6 @@ const handleRecipe = (e, onRecipeAdded) => {
     if(!title) {
         helper.handleError('Title is required!');
         return false;
-    } else if (!author) {
-        helper.handleError('Author is required!');
-        return false;
     } else if(!prepTime) {
         helper.handleError('Prep Time is required!');
         return false;
@@ -63,7 +58,7 @@ const handleRecipe = (e, onRecipeAdded) => {
     let tags = "";
 
     helper.sendPost(e.target.action, 
-        {title, author, tags, prepTime, cookTime, ingredients, equipment, instructions},
+        {title, tags, prepTime, cookTime, ingredients, equipment, instructions},
         onRecipeAdded);
     return false;
 };
@@ -113,7 +108,6 @@ const RecipeForm = (props) => {
               className="recipeForm"
         >
             <input id="recipeTitle" type="text" name="title" placeholder="Recipe Title" />
-            <input id="recipeAuthor" type="text" name="author" placeholder="Author" />
             <label htmlFor="prepTime">Prep Time: </label>
             <input id="recipePrepTime" type="number" min="0" name="prepTime" />
             <label htmlFor="cookTime">Cook Time: </label>

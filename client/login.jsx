@@ -23,6 +23,7 @@ const handleSignup = (e) => {
     helper.hideError();
 
     const username = e.target.querySelector('#user').value;
+    console.log('Username: ' + username);
     const pass = e.target.querySelector('#pass').value;
     const pass2 = e.target.querySelector('#pass2').value;
 

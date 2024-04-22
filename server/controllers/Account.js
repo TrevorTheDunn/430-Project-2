@@ -3,6 +3,7 @@ const models = require('../models');
 const { Account } = models;
 
 const loginPage = (req, res) => res.render('login');
+const accountPage = (req, res) => res.render('account');
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -30,6 +31,7 @@ const login = (req, res) => {
 
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
+  console.log('Username: ' + req.body.username);
   const pass = `${req.body.pass}`;
   const pass2 = `${req.body.pass2}`;
 
@@ -56,9 +58,30 @@ const signup = async (req, res) => {
   }
 };
 
+const getAccount = async (req, res) => {
+  try {
+    const query = {};
+    const docs = await Account.find(query)
+      .select('username _id').lean().exec();
+
+    for(let i = 0; i < docs.length; i++) {
+      if(docs[i].username === req.session.account.username) {
+        return res.json({ account: docs[i] });
+      }
+    }
+
+    return res.status(400).json({ error: 'Could not find account!' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error retrieving account!' });
+  }
+};
+
 module.exports = {
   loginPage,
   login,
   logout,
   signup,
+  getAccount,
+  accountPage,
 };
