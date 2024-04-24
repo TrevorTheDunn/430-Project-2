@@ -10,6 +10,19 @@ const logout = (req, res) => {
   res.redirect('/');
 };
 
+const verifyPassword = (req, res) => {
+  const pass = req.query.p;
+  console.log("Entered pass: " + pass);
+  
+  return Account.authenticate(req.session.account.username, pass, (err, account) => {
+    if (err || !account) {
+      return res.status(500).json({ error: 'Password incorrect!' });
+    }
+
+    return res.json({ validPass: true });
+  });
+};
+
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -62,7 +75,7 @@ const getAccount = async (req, res) => {
   try {
     const query = {};
     const docs = await Account.find(query)
-      .select('username _id').lean().exec();
+      .select('username password _id').lean().exec();
 
     for(let i = 0; i < docs.length; i++) {
       if(docs[i].username === req.session.account.username) {
@@ -84,4 +97,5 @@ module.exports = {
   signup,
   getAccount,
   accountPage,
+  verifyPassword,
 };

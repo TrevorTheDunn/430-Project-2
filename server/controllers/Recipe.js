@@ -21,6 +21,24 @@ const getRecipes = async (req, res) => {
     }
 };
 
+
+const getRecipeById = async (req, res) => {
+    try {
+        const query = { _id: req.query.id };
+        console.log("Id: " + query);
+        const docs = await Recipe.find(query)
+            .select('title author prepTime cookTime ingredients equipment instructions createdDate _id')
+            .lean().exec();
+
+        console.log("Docs: " + docs);
+
+        return res.json({ recipe: docs });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Error retrieving recipes!' });
+    }
+};
+
 //Creates a Recipe and sends it to the database
 const createRecipe = async (req, res) => {
     if (!req.body.title || !req.body.prepTime || 
@@ -64,4 +82,5 @@ module.exports = {
     createRecipe,
     homePage,
     getRecipes,
+    getRecipeById,
 };

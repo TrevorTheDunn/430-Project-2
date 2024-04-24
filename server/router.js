@@ -6,6 +6,8 @@ const router = (app) => {
 
   app.get('/getRecipes', controllers.Recipe.getRecipes);
 
+  app.get('/getRecipeById', controllers.Recipe.getRecipeById);
+
   app.get('/getAccount', mid.requiresLogin, controllers.Account.getAccount);
 
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
@@ -24,6 +26,8 @@ const router = (app) => {
   app.get('/home', controllers.Recipe.homePage);
 
   app.get('/account', mid.requiresLogin, controllers.Account.accountPage);
+
+  app.get('/verifyPass', mid.requiresLogin, controllers.Account.verifyPassword);
 
   app.get('/', controllers.Recipe.homePage);
 };

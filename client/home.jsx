@@ -9,13 +9,43 @@ let allRecipes = [];
 // with the same id, then returns a div full of information
 // from that recipe
 const Recipe = (props) => {
-    let recipe;
+    /*let recipe;
 
     for(let i = 0; i < allRecipes.length; i++) {
         if(allRecipes[i]._id === props.id) {
             recipe = allRecipes[i];
         }
+    }*/
+
+    const [recipe, setRecipe] = useState(props.recipe);
+
+    useEffect(() => {
+        const loadRecipeById = async () => {
+            const url = `?id=${props.id}`;
+            const response = await fetch('/getRecipeById' + url, {
+                    method: 'get',
+                    accept: 'application/json',
+                }
+            );
+            const data = await response.json();
+            console.log("Data: " + data);
+            console.log("Data Recipe: " + JSON.stringify(data.recipe));
+            setRecipe(data.recipe[0]);
+        };
+        loadRecipeById();
+    }, [props.reloadRecipe]);
+
+    console.log("Recipe: " + JSON.stringify(recipe));
+
+    if(!recipe) {
+        return (
+            <div className="recipe">
+                <h3 className="emptyRecipe">Recipe not found!</h3>
+            </div>
+        );
     }
+
+    console.log("Recipe title: " + recipe.title);
 
     const ingredientsNodes = recipe.ingredients.map(ingredient => {
         return ( <li className="ingredient">{ingredient}</li> );
@@ -54,10 +84,11 @@ const Recipe = (props) => {
 
 // Viewer - returns Recipe
 const Viewer = (props) => {
+    const [reloadRecipe, setReloadRecipe] = useState(false);
     
     return (
         <div>
-            <Recipe id={props.id} />
+            <Recipe id={props.id} recipe={null} reloadRecipe={reloadRecipe} />
         </div>
     );
 };
