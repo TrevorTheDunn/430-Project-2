@@ -10,6 +10,38 @@ const logout = (req, res) => {
   res.redirect('/');
 };
 
+const passwordChange = async (req, res) => {
+  const oldPass = req.body.oldPass;
+  const pass = req.body.pass;
+  const pass2 = req.body.pass2;
+
+  return Account.authenticate(req.session.account.username, oldPass, async (err, account) => {
+    if (err || !account) {
+      console.log(err);
+      console.log("Account: " + account);
+      return res.status(500).json({ error: 'An error occurred!' });
+    }
+
+    if(!pass) {
+      return res.status(400).json({ error: 'A new password is required!' });
+    }
+
+    if(pass !== pass2) {
+      return res.status(400).json({ error: 'Passwords do not match!' });
+    }
+
+    try {
+      const hash = Account.generateHash(pass);
+      const query = { username: req.session.account.username };
+      await Account.findOneAndUpdate(query, { password: hash }).exec();
+      return res.status(201).json({ message: 'Password successfully updated!' });
+    } catch(err) {
+      console.log(err);
+      return res.status(500).json({ error: 'An error occurred!' });
+    }
+  });
+};
+
 const verifyPassword = (req, res) => {
   const pass = req.query.p;
   console.log("Entered pass: " + pass);
@@ -98,4 +130,5 @@ module.exports = {
   getAccount,
   accountPage,
   verifyPassword,
+  passwordChange,
 };

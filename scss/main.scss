@@ -1,0 +1,173 @@
+@use 'sass:math';
+
+@function calcWidth($width) {
+    @return math.div($width, 3);
+};
+
+$bodyWidth: 100%;
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0; 
+}
+
+body {
+    overflow: hidden;
+    background-color: #e6c7a8;
+}
+
+#navbar {
+    background-color: #e87558;
+    position: relative;
+
+    .button {
+        background-color: #e87558;
+        margin-top: 5px;
+        border: 0px;
+        color: white;
+
+        a {
+            color: white;
+        }
+    }
+
+    .button:hover {
+        background-color: #a85540;
+    }
+}
+
+#content {
+
+    .recipe {
+        height: 150px;
+        position: relative;
+    }
+
+    .recipeListTitle {
+        font-size: 35px;
+        max-width: 300px;
+        text-decoration: underline;
+        color: #e87558;
+
+        a {
+            color: #e87558;
+        }
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+
+    .recipeListAuthor {
+        font-size: 20px;
+        position: absolute;
+        left: 5px;
+        top: 50px;
+    }
+
+    .recipeListPrepTime {
+        position: absolute;
+        right: 5px;
+        top: 25px;
+        float: right;
+    }
+
+    .recipeListCookTime {
+        position: absolute;
+        right: 5px;
+        top: 50px;
+        float: right;
+    }
+
+    .recipeAuthor {
+
+    }
+
+    .recipePrepTime {
+
+    }
+
+    .recipeCookTime {
+
+    }
+
+    .recipeIngredients {
+
+    }
+
+    .recipeEquipment {
+
+    }
+}
+
+#emptyColumn {
+    min-width: calcWidth($bodyWidth);
+}
+
+#logo {
+    height: 50px;
+}
+
+.fullRecipe {
+    padding-left: 5px;
+    margin-left: 5px;
+
+    .recipeTitle {
+        font-size: 40px;
+        text-decoration: underline;
+        color: #e87558;
+        /*position: absolute;
+        top: 25px;
+        left: 5px;*/
+    }
+
+    .backButton {
+        height: 25px;
+        width: 15px;
+        top: 5px;
+    }
+
+    .recipeAuthor {
+        font-size: 20px;
+    }
+
+    .recipePrepTime {
+        font-size: 20px;
+        color: #e87558;
+    }
+
+    .recipeCookTime {
+        font-size: 20px;
+        color: #e87558;
+    }
+
+    .recipeIngredients {
+        left: 5px;
+        list-style-type: disc;
+    }
+
+    .ingredientsTitle {
+        font-size: 30px;
+        color: #e87558;
+    }
+
+    .recipeEquipment {
+        list-style-type: disc;
+    }
+
+    .equipmentTitle {
+        font-size: 30px;
+        color: #e87558;
+    }
+
+    .instructionsTitle {
+        font-size: 30px;
+        color: #e87558;
+    }
+
+    li {
+        position: relative;
+        left: 50px;
+    }
+}

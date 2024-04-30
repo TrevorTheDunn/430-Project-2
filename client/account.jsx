@@ -7,26 +7,13 @@ const handlePassChange = async (e, onPassChanged) => {
     e.preventDefault();
     helper.hideError();
 
-    const oldPassword = e.target.querySelector('#oldPass').value;
-    const newPassword = e.target.querySelector('#newPass').value;
-    const newPassword2 = e.target.querySelector('#newPass2').value;
+    const oldPass = e.target.querySelector('#oldPass').value;
+    const pass = e.target.querySelector('#newPass').value;
+    const pass2 = e.target.querySelector('#newPass2').value;
 
-    const checkPass = async () => {
-        const url = `?p=${oldPassword}`;
-        const response = await fetch('/verifyPass' + url);
-        const data = await response.json();
-        return data.validPass;
-    };
-
-    if(!checkPass()) {
-        //Old pass doesn't match
-        helper.handleError('Old password is incorrect!');
-        return false;
-    }
-
-    /*helper.sendPost(e.target.action, 
-        {oldPassword, newPassword, newPassword2},
-        onPassChanged);*/
+    helper.sendPost(e.target.action, 
+        {oldPass, pass, pass2},
+        onPassChanged);
     return false;
 };
 

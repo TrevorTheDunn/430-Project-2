@@ -7,17 +7,25 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="" alt="logo"/></a>
-    <div class="navlink"><a href="/login">Login</a></div>
-    <div class="navlink"><a href="/account">Account</a></div>
-    <div class="navlink"><a href="/logout">Log out</a></div>
-    <div class="navlink"><a href="/creator">Create Recipe</a></div>
+  <nav class="navbar has-shadow is-info is-fixed-top" id="navbar">
+    <a href="/login"><img id="logo" src="/assets/img/logo.png" alt="logo"/></a>
+    <div class="navlink button is-text"><a href="/login">Login</a></div>
+    <div class="navlink button is-text"><a href="/account">Account</a></div>
+    <div class="navlink button is-text"><a href="/logout">Log out</a></div>
+    <div class="navlink button is-text"><a href="/creator">Create Recipe</a></div>
   </nav>
 
-  <section id="content">
+  <div class="columns">
+    <section id="emptyColumn" class="colum is-one-third">
 
-  </section>
+    </section>
+    <section class="column is-one-third" id="content">
 
+    </section>
+    <section id="emptyColumn" class="column is-one-third">
+
+    </section>
+  </div>
   <div id="errorNotification" class='hidden'>
     <h3><span id="errorMessage"></span></h3>
   </div>

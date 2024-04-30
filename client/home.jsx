@@ -60,22 +60,22 @@ const Recipe = (props) => {
     });
 
     return (
-        <div className="recipe">
-            <a href="/home">Exit</a>
+        <div className="fullRecipe">
+            <a className="backButton button" href="/home">Exit</a>
             <h1 className="recipeTitle">{recipe.title}</h1>
             <h3 className="recipeAuthor">By: {recipe.author}</h3>
             <h3 className="recipePrepTime">Prep Time: {recipe.prepTime} mins</h3>
             <h3 className="recipeCookTime">Cook Time: {recipe.cookTime} mins</h3>
             <ul className="recipeIngredients">
-                <h3>Ingredients: </h3>
+                <h3 className="ingredientsTitle">Ingredients: </h3>
                 {ingredientsNodes}
             </ul>
             <ul className="recipeEquipment">
-                <h3>Equipment: </h3>
+                <h3 className="equipmentTitle">Equipment: </h3>
                 {equipmentNodes}
             </ul>
             <ol className="recipeInstructions">
-                <h3>Instructions: </h3>
+                <h3 className="instructionsTitle">Instructions: </h3>
                 {instructionsNodes}
             </ol>
         </div>

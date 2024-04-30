@@ -1,0 +1,122 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  background-color: #e6c7a8;
+}
+
+#navbar {
+  background-color: #e87558;
+  position: relative;
+}
+#navbar .button {
+  background-color: #e87558;
+  margin-top: 5px;
+  border: 0px;
+  color: white;
+}
+#navbar .button a {
+  color: white;
+}
+#navbar .button:hover {
+  background-color: #a85540;
+}
+
+#content .recipe {
+  height: 150px;
+  position: relative;
+}
+#content .recipeListTitle {
+  font-size: 35px;
+  max-width: 300px;
+  text-decoration: underline;
+  color: #e87558;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+#content .recipeListTitle a {
+  color: #e87558;
+}
+#content .recipeListAuthor {
+  font-size: 20px;
+  position: absolute;
+  left: 5px;
+  top: 50px;
+}
+#content .recipeListPrepTime {
+  position: absolute;
+  right: 5px;
+  top: 25px;
+  float: right;
+}
+#content .recipeListCookTime {
+  position: absolute;
+  right: 5px;
+  top: 50px;
+  float: right;
+}
+#emptyColumn {
+  min-width: 33.3333333333%;
+}
+
+#logo {
+  height: 50px;
+}
+
+.fullRecipe {
+  padding-left: 5px;
+  margin-left: 5px;
+}
+.fullRecipe .recipeTitle {
+  font-size: 40px;
+  text-decoration: underline;
+  color: #e87558;
+  /*position: absolute;
+  top: 25px;
+  left: 5px;*/
+}
+.fullRecipe .backButton {
+  height: 25px;
+  width: 15px;
+  top: 5px;
+}
+.fullRecipe .recipeAuthor {
+  font-size: 20px;
+}
+.fullRecipe .recipePrepTime {
+  font-size: 20px;
+  color: #e87558;
+}
+.fullRecipe .recipeCookTime {
+  font-size: 20px;
+  color: #e87558;
+}
+.fullRecipe .recipeIngredients {
+  left: 5px;
+  list-style-type: disc;
+}
+.fullRecipe .ingredientsTitle {
+  font-size: 30px;
+  color: #e87558;
+}
+.fullRecipe .recipeEquipment {
+  list-style-type: disc;
+}
+.fullRecipe .equipmentTitle {
+  font-size: 30px;
+  color: #e87558;
+}
+.fullRecipe .instructionsTitle {
+  font-size: 30px;
+  color: #e87558;
+}
+.fullRecipe li {
+  position: relative;
+  left: 50px;
+}
