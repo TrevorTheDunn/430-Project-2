@@ -15,9 +15,9 @@ const passwordChange = async (req, res) => {
   const pass = req.body.pass;
   const pass2 = req.body.pass2;
 
-  return Account.authenticate(req.session.account.username, oldPass, async (err, account) => {
-    if (err || !account) {
-      console.log(err);
+  return Account.authenticate(req.session.account.username, oldPass, async (error, account) => {
+    if (error || !account) {
+      console.log(error);
       console.log("Account: " + account);
       return res.status(500).json({ error: 'An error occurred!' });
     }
