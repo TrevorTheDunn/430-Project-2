@@ -3,20 +3,10 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
-let allRecipes = [];
-
 // Recipe - loops through the array of recipes to find the one
 // with the same id, then returns a div full of information
 // from that recipe
 const Recipe = (props) => {
-    /*let recipe;
-
-    for(let i = 0; i < allRecipes.length; i++) {
-        if(allRecipes[i]._id === props.id) {
-            recipe = allRecipes[i];
-        }
-    }*/
-
     const [recipe, setRecipe] = useState(props.recipe);
 
     useEffect(() => {
@@ -130,8 +120,6 @@ const RecipeList = (props) => {
             );
         }
 
-    allRecipes = recipes;
-
     const recipeNodes = recipes.map(recipe => {
         console.log("Id: " + recipe._id);
         return (
@@ -167,8 +155,7 @@ const Content = () => {
 // creates a root and renders Content to the root
 const init = () => {
     console.log("Init called");
-    allRecipes = [];
-    const root = createRoot(document.getElementById('content'));
-    root.render( <Content />);
+    const contentRoot = createRoot(document.getElementById('content'));
+    contentRoot.render( <Content /> );
 }
 window.onload = init;

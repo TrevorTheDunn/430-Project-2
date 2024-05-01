@@ -82,8 +82,6 @@ const init = () => {
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
 
-    const root = createRoot(document.getElementById('content'));
-
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render( <LoginWindow /> ); 
@@ -96,6 +94,7 @@ const init = () => {
         return false;
     });
 
+    const root = createRoot(document.getElementById('content'));
     root.render( <LoginWindow /> );
 };
 

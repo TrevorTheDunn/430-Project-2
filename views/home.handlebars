@@ -8,16 +8,16 @@
 </head>
 <body>
   <nav class="navbar has-shadow is-info is-fixed-top" id="navbar">
-    <a href="/login"><img id="logo" src="/assets/img/logo.png" alt="logo"/></a>
-    <div class="navlink button is-text"><a href="/login">Login</a></div>
+    <a href="/home"><img id="logo" src="../assets/img/logo.png" alt="logo" /></a>
+    <div class="navlink button is-text"><a href="/login">Log In</a></div>
+    <div class="navlink button is-text"><a href="/logout">Log Out</a></div>
     <div class="navlink button is-text"><a href="/account">Account</a></div>
-    <div class="navlink button is-text"><a href="/logout">Log out</a></div>
     <div class="navlink button is-text"><a href="/creator">Create Recipe</a></div>
   </nav>
 
   <div class="columns">
     <section id="emptyColumn" class="colum is-one-third">
-
+      
     </section>
     <section class="column is-one-third" id="content">
 
@@ -29,6 +29,6 @@
   <div id="errorNotification" class='hidden'>
     <h3><span id="errorMessage"></span></h3>
   </div>
-  <script src="/assets/homeBundle.js"></script>
+  <script type="module" src="/assets/homeBundle.js"></script>
 </body>
 </html>

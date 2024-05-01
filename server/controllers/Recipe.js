@@ -4,7 +4,10 @@ const { Recipe } = models;
 
 //Renders the creator or home pages if called
 const creatorPage = async (req, res) => res.render('creator');
-const homePage = async (req, res) => res.render('home');
+const homePage = async (req, res) => {
+    console.log("Account: " + req.session.account);
+    res.render('home');
+};
 
 //Retrieves recipes from the database and returns them
 const getRecipes = async (req, res) => {

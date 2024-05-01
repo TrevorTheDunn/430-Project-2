@@ -5,6 +5,15 @@ const { Account } = models;
 const loginPage = (req, res) => res.render('login');
 const accountPage = (req, res) => res.render('account');
 
+const isLoggedIn = (req, res) => {
+  console.log(req.session.account);
+  if(req.session.account != undefined) {
+    return res.json({ loggedIn: true });
+  }
+
+  return res.json({ loggedIn: false });
+}
+
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
@@ -39,19 +48,6 @@ const passwordChange = async (req, res) => {
       console.log(err);
       return res.status(500).json({ error: 'An error occurred!' });
     }
-  });
-};
-
-const verifyPassword = (req, res) => {
-  const pass = req.query.p;
-  console.log("Entered pass: " + pass);
-  
-  return Account.authenticate(req.session.account.username, pass, (err, account) => {
-    if (err || !account) {
-      return res.status(500).json({ error: 'Password incorrect!' });
-    }
-
-    return res.json({ validPass: true });
   });
 };
 
@@ -129,6 +125,6 @@ module.exports = {
   signup,
   getAccount,
   accountPage,
-  verifyPassword,
   passwordChange,
+  isLoggedIn,
 };

@@ -15,6 +15,8 @@ const router = (app) => {
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
+  app.get('/checkLogin', controllers.Account.isLoggedIn);
+
   app.get('/creator', mid.requiresLogin, controllers.Recipe.creatorPage);
   app.post('/creator', mid.requiresLogin, controllers.Recipe.createRecipe);
 
@@ -22,7 +24,6 @@ const router = (app) => {
 
   app.get('/account', mid.requiresLogin, controllers.Account.accountPage);
 
-  app.get('/verifyPass', mid.requiresLogin, controllers.Account.verifyPassword);
   app.post('/passwordChange', mid.requiresLogin, controllers.Account.passwordChange);
 
   app.get('/', controllers.Recipe.homePage);
