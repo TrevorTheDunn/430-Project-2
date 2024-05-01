@@ -7,7 +7,7 @@ const accountPage = (req, res) => res.render('account');
 
 const isLoggedIn = (req, res) => {
   console.log(req.session.account);
-  if(req.session.account != undefined) {
+  if(req.session.account !== undefined) {
     return res.json({ loggedIn: true });
   }
 
